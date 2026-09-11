@@ -1,0 +1,37 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  labels:
+    dashboards: grafana
+  name: grafana
+  namespace: model-observation
+spec:
+  client:
+    preferIngress: false
+  config:
+    auth:
+      disable_login_form: 'False'
+      disable_signout_menu: 'True'
+    auth.anonymous:
+      enabled: 'True'
+      org_role: Viewer
+    auth.basic:
+      enabled: 'True'
+    auth.proxy:
+      enabled: 'False'
+    log:
+      mode: console
+    security:
+      admin_password: CHANGE_ME
+      admin_user: CHANGE_ME
+    users:
+      auto_assign_org: 'true'
+      auto_assign_org_id: '1'
+      auto_assign_org_role: Viewer
+  route:
+    spec:
+      tls:
+        insecureEdgeTerminationPolicy: Redirect
+        termination: edge
+      wildcardPolicy: None
+  version: 'docker.io/grafana/grafana@sha256:70d9599b186ce287be0d2c5ba9a78acb2e86c1a68c9c41449454d0fc3eeb84e8'
